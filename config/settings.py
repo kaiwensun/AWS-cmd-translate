@@ -1,7 +1,9 @@
-import sys
+import sys, collections, importlib
 _NOT_SET_ = "_NOT_SET_"
 
 # These settings can be overridden by local_settings.py
+
+# Basic settings
 DEBUG_MODE = False
 MAIN_LANGUAGE = "zh"
 AWS_NOT_SUPPORTED_LANGUAGES = ["ca", "cy", "gu", "kn", "lt", "mk", "ml", "mr", "ne", "pa", "te"]
@@ -13,6 +15,12 @@ AWS_ENDPOINT_URL = None
 AWS_ACCESS_KEY_ID = None
 AWS_SECRET_ACCESS_KEY = None
 AWS_SESSION_TOKEN = None
+
+# Trnaslation Engines (class names)
+ENGINES = [
+    'AmazonTranslate'
+]
+ONLY_ONE_ENGINE = False
 
 # Overriding
 thismodule = sys.modules[__name__]
