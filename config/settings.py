@@ -9,7 +9,7 @@ AWS_NOT_SUPPORTED_LANGUAGES = ["ca", "cy", "gu", "kn", "lt", "mk", "ml", "mr", "
 # Overriding
 thismodule = sys.modules[__name__]
 try:
-    import local_settings
+    from config import local_settings
     for key in dir(local_settings):
         setattr(thismodule, key, getattr(local_settings, key))
 except ModuleNotFoundError:
