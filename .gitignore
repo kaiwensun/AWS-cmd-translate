@@ -1,0 +1,7 @@
+/__pycache__/
+/.venv/
+/config/local_settings.py
+/.vscode
+*.pyc
+*.pyo
+*.swp

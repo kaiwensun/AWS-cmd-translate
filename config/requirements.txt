@@ -1,0 +1,2 @@
+boto3==1.12.26
+langdetect==1.0.8
