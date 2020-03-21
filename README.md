@@ -40,7 +40,8 @@ Special commands are available in standby mode.
 
 ### Configuration
 
-If your main language is not (Simplified) Chinese, you can your own from [Amazon Translate supported languages](https://docs.aws.amazon.com/translate/latest/dg/what-is.html#what-is-languages).
+#### Main language
+If your main language is not (Simplified) Chinese, you can choose your own language code from [Amazon Translate supported languages](https://docs.aws.amazon.com/translate/latest/dg/what-is.html#what-is-languages).
 
 Then create a file `./config/local_settings.py` and override the `MAIN_LANGUAGE` with your language code there. For example,
 
@@ -55,3 +56,6 @@ Then you can try
 $ ./translate.sh how are you?
 잘 지내세요?
 ```
+
+#### AWS Translate client
+A few common aws client configuration (such as region and secret access key) can be overridden in `config/local_settings.py` file. Check `config/settings.py` for details.

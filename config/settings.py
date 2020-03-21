@@ -6,6 +6,14 @@ DEBUG_MODE = False
 MAIN_LANGUAGE = "zh"
 AWS_NOT_SUPPORTED_LANGUAGES = ["ca", "cy", "gu", "kn", "lt", "mk", "ml", "mr", "ne", "pa", "te"]
 
+# AWS Translate client
+AWS_REGION_NAME = None
+AWS_API_VERSION = None
+AWS_ENDPOINT_URL = None
+AWS_ACCESS_KEY_ID = None
+AWS_SECRET_ACCESS_KEY = None
+AWS_SESSION_TOKEN = None
+
 # Overriding
 thismodule = sys.modules[__name__]
 try:

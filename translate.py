@@ -2,7 +2,15 @@ import boto3, sys, os
 import langdetect
 from config import settings
 
-translate_client = boto3.client('translate')
+AWS_CLIENT_CONFIG = {
+    "region_name": settings.AWS_REGION_NAME,
+    "api_version": settings.AWS_API_VERSION,
+    "endpoint_url": settings.AWS_ENDPOINT_URL,
+    "aws_access_key_id": settings.AWS_ACCESS_KEY_ID,
+    "aws_secret_access_key": settings.AWS_SECRET_ACCESS_KEY,
+    "aws_session_token": settings.AWS_SESSION_TOKEN
+}
+translate_client = boto3.client('translate', **AWS_CLIENT_CONFIG)
 
 def langdetect2aws(code):
     if code == "zh-cn":
