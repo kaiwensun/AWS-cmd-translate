@@ -1,6 +1,6 @@
 # AWS cmd translate
 
-This is a command line translation tool backed by [Amazon Translate](https://aws.amazon.com/translate/)
+This is a command line translation tool backed by [Amazon Translate](https://aws.amazon.com/translate/) and Youdao.
 
 ## Prerequesites
 
@@ -81,4 +81,71 @@ A deprecated version of [Youdao translation API](http://fanyi.youdao.com/openapi
 ```
 YOUDAO_APP_NAME = "your app name here"
 YOUDAO_API_KEY = "your api key here"
+```
+
+Example user experience:
+
+```
+$ ./translate.sh
+> 直升机
+=========== youdao ============
+[zhí shēng jī]
+helicopter
+copter
+The helicopter
+
+直升机
+ - Helicopter
+ - copter
+ - Chopper Checkpoint
+
+军用直升机
+ - military helicopter
+ - military helicopter
+ - Army Helicopters
+
+直升机航母
+ - helicopter carrier
+ - CVH
+====== amazon_translate =======
+直升机
+> helicopter
+=========== youdao ============
+[ˈhelɪkɒptə(r)]
+n. [航] 直升飞机
+vt. 由直升机运送
+vi. [航] 乘直升飞机
+直升机
+
+Helicopter
+ - 直升机
+ - 直升飞机
+ - 直升
+
+helicopter parents
+ - 直升机父母
+ - 直升机家长
+ - 指某些“望子成龙
+
+Helicopter Theory
+ - 直升机理论
+ - 直升飞机理论
+ - 原名
+====== amazon_translate =======
+直升机
+> 大风车吱呀吱悠悠的转
+=========== youdao ============
+Large wind turbines, noting cheep turn leisurely
+====== amazon_translate =======
+Big windmill squeaky turn
+> Comment ça va?
+=========== youdao ============
+怎么样?
+====== amazon_translate =======
+你好吗？
+> ça va!
+=========== youdao ============
+你好!
+====== amazon_translate =======
+查瓦！
 ```
