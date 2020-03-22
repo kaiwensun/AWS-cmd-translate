@@ -73,3 +73,12 @@ ENGINES = [
 ]
 ONLY_ONE_ENGINE = True
 ```
+
+### Youdao Dictionary (1.1)
+
+A deprecated version of [Youdao translation API](http://fanyi.youdao.com/openapi?path=data-mode) is integrated with this tool. If you have registered an API key before it was deprecated, you can put them in the `config/local_settings.py`, and add `"Youdao"` in the `ENGINES` settings.
+
+```
+YOUDAO_APP_NAME = "your app name here"
+YOUDAO_API_KEY = "your api key here"
+```

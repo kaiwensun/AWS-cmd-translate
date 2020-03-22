@@ -47,5 +47,5 @@ class AmazonTranslate:
 
         return result['TranslatedText']
 
-    def display(self, translated_text):
-        print(translated_text)
+    def display(self, translation_result):
+        print(translation_result)
