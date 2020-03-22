@@ -53,7 +53,6 @@ class Youdao:
     def display(self, result):
         found = False
         err_code = result["errorCode"]
-        print(result)
         if err_code:
             print(self._err_codes[err_code])
             return
@@ -63,14 +62,20 @@ class Youdao:
                 if result.get("basic", {}).get(phonetic_type):
                     print("[%s]" % result["basic"][phonetic_type])
                     break
+
+        dedup = set()
         if settings.YOUDAO_DISPLAY_BASIC:
             for basic_explain in result.get("basic", {}).get("explains", []):
-                print(basic_explain)
-                found = True
+                if basic_explain not in dedup:
+                    dedup.add(basic_explain)
+                    print(basic_explain)
+                    found = True
 
         if settings.YOUDAO_DISPLAY_TRANSLATION:
             for translation in result.get("translation", []):
-                if translation != self.last_source_text:
+                if translation != self.last_source_text \
+                        and translation not in dedup:
+                    dedup.add(translation)
                     print(translation)
                     found = True
         if settings.YOUDAO_DISPLAY_WEB:
