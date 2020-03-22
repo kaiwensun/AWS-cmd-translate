@@ -10,14 +10,26 @@ def clearScreen():
     command = "cls" if os.name=="nt" else "clear"
     os.system(command)
 
+def snake2camel(name):
+    return "".join(map(str.capitalize, name.split("_")))
+
+def embed_word_in_line(word, length=30, line_char="="):
+    left_len = max(0, (length - len(word)) // 2 - 1)
+    right_len = max(0, length - len(word) - left_len - 1)
+    return line_char * left_len + " " + word + " " + line_char * right_len
+
 def search(source_text):
+    if not source_text.strip():
+        return
     success = False
     for engine_name in settings.ENGINES:
         try:
             if engine_name not in translators_cache:
-                Translator = getattr(Translators, engine_name)
+                Translator = getattr(getattr(Translators, engine_name), snake2camel(engine_name))
                 translators_cache[engine_name] = Translator()
             translator = translators_cache[engine_name]
+            if settings.DEBUG_MODE or settings.DISPLAY_SOURCE_DICT:
+                print(embed_word_in_line(engine_name))
             res = translator.lookup(source_text)
             if res is None:
                 continue
