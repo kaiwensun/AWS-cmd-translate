@@ -1,4 +1,6 @@
-import sys, collections, importlib
+import sys
+import collections
+import importlib
 _NOT_SET_ = "_NOT_SET_"
 
 # These settings can be overridden by local_settings.py
@@ -14,7 +16,7 @@ ONLY_ONE_ENGINE = False
 DISPLAY_SOURCE_DICT = False
 
 # AWS Translate settings
-## AWS Translate client
+# AWS Translate client
 AWS_REGION_NAME = None
 AWS_API_VERSION = None
 AWS_ENDPOINT_URL = None
@@ -22,7 +24,7 @@ AWS_ACCESS_KEY_ID = None
 AWS_SECRET_ACCESS_KEY = None
 AWS_SESSION_TOKEN = None
 
-## Basic AWS Translate settings
+# Basic AWS Translate settings
 MAIN_LANGUAGE = "zh"
 AWS_NOT_SUPPORTED_LANGUAGES = ["ca", "cy", "gu", "kn", "lt", "mk", "ml", "mr", "ne", "pa", "te"]
 

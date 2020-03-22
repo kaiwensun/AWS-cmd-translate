@@ -1,15 +1,17 @@
-import sys, requests
+import sys
+import requests
 from config import settings
+
 
 class Youdao:
 
     _err_codes = {
-        0:u"正常 / ok",
-        20:u"要翻译的文本过长 / text too long",
-        30:u"无法进行有效的翻译 / failed to translate",
-        40:"不支持的语言类型 / unsupported language type",
-        50:u"无效的key / invalid API key",
-        60:u"无词典结果，仅在获取词典结果生效 / No result"
+        0: u"正常 / ok",
+        20: u"要翻译的文本过长 / text too long",
+        30: u"无法进行有效的翻译 / failed to translate",
+        40: "不支持的语言类型 / unsupported language type",
+        50: u"无效的key / invalid API key",
+        60: u"无词典结果，仅在获取词典结果生效 / No result"
     }
 
     def __init__(self):
@@ -38,8 +40,7 @@ class Youdao:
             elif settings.DEBUG_MODE and res.status_code != 200:
                 print(res.text, file=sys.stderr)
                 print(res.text, file=sys.reason)
-
-        except:
+        except Exception:
             print("请检查网络连接")
             if settings.DEBUG_MODE:
                 raise
@@ -52,7 +53,8 @@ class Youdao:
     def display(self, result):
         found = False
         err_code = result["errorCode"]
-        if err_code!=0:
+        print(result)
+        if err_code:
             print(self._err_codes[err_code])
             return
         if settings.YOUDAO_DISPLAY_PHONETIC:
@@ -62,7 +64,7 @@ class Youdao:
                     print("[%s]" % result["basic"][phonetic_type])
                     break
         if settings.YOUDAO_DISPLAY_BASIC:
-            for basic_explain in result.get("basic", {}).get("explains"):
+            for basic_explain in result.get("basic", {}).get("explains", []):
                 print(basic_explain)
                 found = True
 
