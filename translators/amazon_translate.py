@@ -1,6 +1,9 @@
-import boto3, sys, os
+import boto3
+import sys
+import os
 import langdetect
 from config import settings
+
 
 class AmazonTranslate:
 
@@ -31,7 +34,9 @@ class AmazonTranslate:
         tar_code = "en"
         if src_code in settings.AWS_NOT_SUPPORTED_LANGUAGES:
             if settings.DEBUG_MODE:
-                print("%s language is detected but not supported. use aws auto." % src_code)
+                print(
+                    "%s language is detected but not supported. use aws auto." %
+                    src_code)
             src_code = "auto"
             tar_code = settings.MAIN_LANGUAGE
         else:
@@ -39,7 +44,8 @@ class AmazonTranslate:
                 tar_code = "zh" if src_code == "en" else "en"
             else:
                 tar_code = settings.MAIN_LANGUAGE
-        result = self._translate_client.translate_text(Text=source_text, SourceLanguageCode=src_code, TargetLanguageCode=tar_code)
+        result = self._translate_client.translate_text(
+            Text=source_text, SourceLanguageCode=src_code, TargetLanguageCode=tar_code)
         if settings.DEBUG_MODE:
             print("(%s -> %s)" % (src_code, tar_code))
             import pprint
