@@ -32,6 +32,9 @@ class Youdao:
         base_url = "http://fanyi.youdao.com/openapi.do"
         try:
             res = requests.get(base_url, params=payload)
+            if settings.DEBUG_MODE:
+                print(res.url)
+                print(res.status_code)
             if res.status_code == 403:
                 # Youdao is blocked by internet service provider
                 if settings.DEBUG_MODE:
@@ -51,6 +54,9 @@ class Youdao:
         return res.json()
 
     def display(self, result):
+        if settings.DEBUG_MODE:
+            import pprint
+            pprint.pprint(result)
         found = False
         err_code = result["errorCode"]
         if err_code:
