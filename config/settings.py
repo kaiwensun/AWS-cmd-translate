@@ -40,7 +40,7 @@ try:
     from config import local_settings
     for key in dir(local_settings):
         setattr(thismodule, key, getattr(local_settings, key))
-except ModuleNotFoundError:
+except ImportError:
     pass
 
 for key in dir(thismodule):
