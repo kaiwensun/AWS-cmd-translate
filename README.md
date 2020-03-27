@@ -70,8 +70,8 @@ To integrate with your own dictionary engines, you can create your own Python cl
 ```
 # config/local_settings.py
 ENGINES = [
-    "Youdao",
-    "AmazonTranslate"
+    "youdao",
+    "amazon_translate"
 ]
 ONLY_ONE_ENGINE = True
 ```
