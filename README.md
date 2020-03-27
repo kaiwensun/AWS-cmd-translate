@@ -1,6 +1,8 @@
-# AWS cmd translate
+# CommandLine translate
 
-This is a command line translation tool backed by [Amazon Translate](https://aws.amazon.com/translate/) and Youdao.
+This is a command line translation tool backed by [Amazon Translate](https://aws.amazon.com/translate/), [Youdao translation API (v1.1)](http://fanyi.youdao.com/openapi), and [Baidu translation platform](https://api.fanyi.baidu.com/api/trans/product/index).
+
+You will need to set up your own credentials to use those APIs.
 
 ## Prerequesites
 
@@ -43,7 +45,7 @@ Special commands are available in standby mode.
 #### Main language
 If your main language is not (Simplified) Chinese, you can choose your own language code from [Amazon Translate supported languages](https://docs.aws.amazon.com/translate/latest/dg/what-is.html#what-is-languages).
 
-Then create a file `./config/local_settings.py` and override the `MAIN_LANGUAGE` with your language code there. For example,
+Then create a file `./config/local_settings.py` and override the `MAIN_LANGUAGE` and `COMMON_LANGUAGES` with your language code(s) there. For example,
 
 ```
 # ./config/local_settings.py
@@ -147,5 +149,15 @@ Big windmill squeaky turn
 =========== youdao ============
 你好!
 ====== amazon_translate =======
-查瓦！
+我很好
+```
+
+### Baidu Language type Detection API
+
+The tool will first attempt to detect the input languages offline. If fail to detect, it can try to use Baidu API to detect the language type. To enable this feature, you need to apply for an API key on [Baidu translation platform](https://api.fanyi.baidu.com/api/trans/product/index). Then in `config/local_settings.py`, override the configurations:
+
+```
+ENABLE_BAIDU_DETECTION = True
+BAIDU_APP_ID = "your app id here"
+BAIDU_API_KEY = "your api key here"
 ```

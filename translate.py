@@ -3,8 +3,10 @@ import sys
 import os
 import importlib
 import langdetect
+import functools
 
 import translators as Translators
+from translators.detect_language import detect_language
 from config import settings
 
 translators_cache = {}
@@ -25,23 +27,25 @@ def embed_word_in_line(word, length=30, line_char="="):
     return line_char * left_len + " " + word + " " + line_char * right_len
 
 
+@functools.lru_cache(None)
+def get_translator(engine_name):
+    Translator = getattr(
+        getattr(Translators, engine_name),
+        snake2camel(engine_name))
+    return Translator()
+
+
 def search(source_text):
     if not source_text.strip():
         return
     success = False
+    src_code, tar_code = detect_language(source_text)
     for engine_name in settings.ENGINES:
         try:
-            if engine_name not in translators_cache:
-                Translator = getattr(
-                    getattr(
-                        Translators,
-                        engine_name),
-                    snake2camel(engine_name))
-                translators_cache[engine_name] = Translator()
-            translator = translators_cache[engine_name]
+            translator = get_translator(engine_name)
             if settings.DEBUG_MODE or settings.DISPLAY_SOURCE_DICT:
                 print(embed_word_in_line(engine_name))
-            res = translator.lookup(source_text)
+            res = translator.lookup(source_text, src_code, tar_code)
             if res is None:
                 continue
             translator.display(res)

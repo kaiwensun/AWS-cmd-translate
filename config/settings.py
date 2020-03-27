@@ -7,6 +7,9 @@ _NOT_SET_ = "_NOT_SET_"
 
 # Basic settings
 DEBUG_MODE = False
+COMMON_LANGUAGES = [
+    'en', 'zh', 'zh-cn', 'zh-tw', 'fr', 'ja', 'ko'
+] # https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 
 # Trnaslation Engines (class names)
 ENGINES = [
@@ -14,6 +17,7 @@ ENGINES = [
 ]
 ONLY_ONE_ENGINE = False
 DISPLAY_SOURCE_DICT = False
+ENABLE_BAIDU_DETECTION = False
 
 # AWS Translate settings
 # AWS Translate client
@@ -26,7 +30,11 @@ AWS_SESSION_TOKEN = None
 
 # Basic AWS Translate settings
 MAIN_LANGUAGE = "zh"
-AWS_NOT_SUPPORTED_LANGUAGES = ["ca", "cy", "gu", "kn", "lt", "mk", "ml", "mr", "ne", "pa", "te"]
+AWS_SUPPORTED_LANGUAGES = {"af", "sq", "am", "ar", "az", "bn", "bs", "bg", "zh", "zh-TW", "hr",
+    "cs", "da", "fa-AF", "nl", "en", "et", "fi", "fr", "fr-CA", "ka", "de", "el", "ha", "he",
+    "hi", "hu", "id", "it", "ja", "ko", "lv", "ms", "no", "fa", "ps", "pl", "pt", "ro", "ru",
+    "sr", "sk", "sl", "so", "es", "sw", "sv", "tl", "ta", "th", "tr", "uk", "ur", "vi"}
+AWS_NOT_SUPPORTED_LANGUAGES = {"ca", "cy", "gu", "kn", "lt", "mk", "ml", "mr", "ne", "pa", "te"}
 
 # Youdao settings
 YOUDAO_DISPLAY_BASIC = True
