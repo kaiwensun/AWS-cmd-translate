@@ -23,7 +23,21 @@ class Youdao:
             "version": "1.1"
         }
 
-    def lookup(self, source_text):
+    def lookup(self, source_text, src_code, tar_code):
+        code_unsupported = False
+        if src_code[:2] == "zh":
+            code_unsupported = tar_code != "en"
+        elif src_code is None or src_code == "auto":
+            code_unsupported = tar_code[:2] not in ["zh", "en"]
+        else:
+            code_unsupported = tar_code[:2] != "zh" or src_code not in [
+                "en", "ja", "ko", "fr", "ru", "es"]
+        if code_unsupported:
+            if settings.DEBUG_MODE:
+                print(
+                    "Youdao doesn't support translation %s -> %s" %
+                    (src_code, tar_code), file=sys.stderr)
+            return
         payload = {
             **self._base_payload,
             "q": source_text

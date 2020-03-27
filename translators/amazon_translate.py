@@ -2,6 +2,7 @@ import boto3
 import sys
 import os
 import langdetect
+import functools
 from config import settings
 
 
@@ -28,21 +29,9 @@ class AmazonTranslate:
             return "-".join((s[0], s[1].upper()))
         return code
 
-    def lookup(self, source_text):
-        src_code = langdetect.detect(source_text)
-        src_code = self._langdetect2aws(src_code)
-        tar_code = "en"
-        if src_code in settings.AWS_NOT_SUPPORTED_LANGUAGES:
-            if settings.DEBUG_MODE:
-                print("%s language is detected but not supported."
-                      " use aws auto." % src_code)
-            src_code = "auto"
-            tar_code = settings.MAIN_LANGUAGE
-        else:
-            if src_code[:2] == settings.MAIN_LANGUAGE[:2]:
-                tar_code = "zh" if src_code == "en" else "en"
-            else:
-                tar_code = settings.MAIN_LANGUAGE
+    def lookup(self, source_text, src_code, tar_code):
+        src_code = self._iso639_to_amazon_code(src_code)
+        tar_code = self._iso639_to_amazon_code(tar_code)
         result = self._translate_client.translate_text(
             Text=source_text,
             SourceLanguageCode=src_code,
@@ -56,3 +45,19 @@ class AmazonTranslate:
 
     def display(self, translation_result):
         print(translation_result)
+
+    def _iso639_to_amazon_code(self, code):
+        if code is None or code == "auto":
+            return code
+        if code == "zh-cn":
+            code = "zh"
+        if code.lower() == "zh-tw":
+            code = "zh-TW"
+        else:
+            code = code.split("-")[0]
+        if code not in settings.AWS_SUPPORTED_LANGUAGES:
+            if settings.DEBUG_MODE:
+                raise Exception(
+                    "Amazon Translate doesn't support language %s" %
+                    code)
+        return code
