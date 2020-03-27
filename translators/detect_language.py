@@ -93,7 +93,7 @@ def detect_baidu(text):
     if not settings.ENABLE_BAIDU_DETECTION:
         return
     endpoint = "https://fanyi-api.baidu.com/api/trans/vip/language"
-    salt = str(random.randint(32768, 65536))
+    salt = str(random.randint(0x8000, 0x7FFFFFFF))
     sign = hashlib.md5(
         (settings.BAIDU_APP_ID +
          text +

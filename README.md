@@ -152,7 +152,7 @@ Big windmill squeaky turn
 我很好
 ```
 
-### Baidu Language type Detection API
+### Baidu Language Type Detection API
 
 The tool will first attempt to detect the input languages offline. If fail to detect, it can try to use Baidu API to detect the language type. To enable this feature, you need to apply for an API key on [Baidu translation platform](https://api.fanyi.baidu.com/api/trans/product/index). Then in `config/local_settings.py`, override the configurations:
 
@@ -161,3 +161,9 @@ ENABLE_BAIDU_DETECTION = True
 BAIDU_APP_ID = "your app id here"
 BAIDU_API_KEY = "your api key here"
 ```
+
+### Baidu Translation
+
+[Baidu translation API](https://api.fanyi.baidu.com/) is integrated. You will need to register your own API keys. The App ID and API key are same as those for Baidu language type detection API.
+
+To enable Baidu translation, add `"baidu_translate"` to `ENGINES` in `config/local_settings.py`.
