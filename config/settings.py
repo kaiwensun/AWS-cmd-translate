@@ -8,7 +8,7 @@ _NOT_SET_ = "_NOT_SET_"
 # Basic settings
 DEBUG_MODE = False
 COMMON_LANGUAGES = [
-    'en', 'zh', 'zh-cn', 'zh-tw', 'fr', 'ja', 'ko'
+    'en', 'zh', 'zh-cn', 'zh-tw'
 ] # https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
 
 # Trnaslation Engines (class names)

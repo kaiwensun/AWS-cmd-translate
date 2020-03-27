@@ -167,3 +167,11 @@ BAIDU_API_KEY = "your api key here"
 [Baidu translation API](https://api.fanyi.baidu.com/) is integrated. You will need to register your own API keys. The App ID and API key are same as those for Baidu language type detection API.
 
 To enable Baidu translation, add `"baidu_translate"` to `ENGINES` in `config/local_settings.py`.
+
+
+### I-Ciba Word Translation
+[I-Ciba open API](http://open.iciba.com/index.php?c=wiki&t=cc) is integrated. Enabling it by adding to `config/local_settings.py`
+```
+ENGINES = ["i_ciba"]
+ICIBA_API_KEY = "your i-ciba key here"
+```
